@@ -26,8 +26,9 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
 
     # Apps
-    'authentication',
-    'users',
+    'authentication.apps.AuthenticationConfig',
+    'users.apps.UsersConfig',
+    'rewards.apps.RewardsConfig',
 
 ]
 
@@ -122,3 +123,12 @@ SIMPLE_JWT = {
 # Celery
 CELERY_BROKER_URL = os.getenv('CELERY_BROKER')
 CELERY_RESULT_BACKEND = os.getenv('CELERY_BROKER')
+CELERY_TIMEZONE = 'Europe/Moscow'
+
+# Celery Beat
+CELERY_BEAT_SCHEDULE = {
+    'process-scheduled-rewards': {
+        'task': 'rewards.tasks.process_scheduled_rewards',
+        'schedule': 10.0,  # каждые 60 секунд
+    },
+}

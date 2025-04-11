@@ -12,7 +12,7 @@ wait_for_postgres() {
 wait_for_postgres
 
 # Применяем миграции
-DJANGO_SETTINGS_MODULE="core.settings.dev" python manage.py makemigrations && \
-DJANGO_SETTINGS_MODULE="core.settings.dev" python manage.py migrate
+DJANGO_SETTINGS_MODULE="core.settings.prod" python manage.py makemigrations && \
+DJANGO_SETTINGS_MODULE="core.settings.prod" python manage.py migrate
 
 exec "$@"

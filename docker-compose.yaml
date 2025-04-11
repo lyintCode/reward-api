@@ -23,7 +23,7 @@ services:
     image: reward-api:latest
     restart: always
     environment:
-      DJANGO_SETTINGS_MODULE: core.settings.dev
+      DJANGO_SETTINGS_MODULE: core.settings.prod
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./docker/entrypoints/api_entrypoint.sh:/app/entrypoint.sh
@@ -58,7 +58,7 @@ services:
     environment:
       CELERY_BROKER_URL: ${CELERY_BROKER}
       CELERY_RESULT_BACKEND: ${CELERY_BROKER}
-      DJANGO_SETTINGS_MODULE: core.settings.dev
+      DJANGO_SETTINGS_MODULE: core.settings.prod
     user: "${UID:-1000}:${GID:-1000}"
     networks:
       - app_network
@@ -79,7 +79,7 @@ services:
     environment:
       CELERY_BROKER_URL: ${CELERY_BROKER}
       CELERY_RESULT_BACKEND: ${CELERY_BROKER}
-      DJANGO_SETTINGS_MODULE: core.settings.dev
+      DJANGO_SETTINGS_MODULE: core.settings.prod
     user: "${UID:-1000}:${GID:-1000}"
     networks:
       - app_network
