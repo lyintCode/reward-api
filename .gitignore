@@ -17,4 +17,4 @@ tz.txt
 .env
 
 # db
-db.sqltie3
+db.sqlite3
