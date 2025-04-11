@@ -1,3 +1,17 @@
 # Text fiels
 tz.txt
 
+# Python
+**/*.pyc
+**/*.pyo
+**/*.pyd
+**/__pycache__/
+
+# log files
+*.log
+
+# Virtual Environments
+.venv/
+
+# Env
+.env

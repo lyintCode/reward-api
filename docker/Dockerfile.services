@@ -1,0 +1,9 @@
+FROM reward-api:latest
+
+WORKDIR /app
+
+ENV PATH="/home/appuser/venv/bin:$PATH"
+
+USER appuser
+
+ENTRYPOINT []

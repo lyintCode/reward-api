@@ -1,0 +1,23 @@
+# files
+__pycache__
+*.py[cod]
+*~
+*.log
+README.md
+
+# folders
+.vscode/
+.cache/
+
+# git
+.git/
+.gitignore
+
+# Virtual Env
+.venv/
+
+# Docker related files
+docker/
+Dockerfile
+.dockerignore
+docker-compose.yml
