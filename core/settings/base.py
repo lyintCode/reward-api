@@ -30,6 +30,9 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'rewards.apps.RewardsConfig',
 
+    # Swagger
+    'drf_yasg',
+
 ]
 
 MIDDLEWARE = [
@@ -102,6 +105,10 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
     ),
+    # Только авторизованные пользователи
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
 }
 
 SIMPLE_JWT = {

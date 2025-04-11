@@ -11,16 +11,20 @@ Django==5.2
 django-cors-headers==4.7.0
 djangorestframework==3.16.0
 djangorestframework_simplejwt==5.5.0
+drf-yasg==1.21.10
 fire==0.7.0
+inflection==0.5.1
 kombu==5.5.2
 markdown-it-py==3.0.0
 mdurl==0.1.2
+packaging==24.2
 prompt_toolkit==3.0.50
 psycopg2-binary==2.9.10
 Pygments==2.19.1
 PyJWT==2.9.0
 python-dateutil==2.9.0.post0
 python-dotenv==1.1.0
+pytz==2025.2
 PyYAML==6.0.2
 redis==5.2.1
 rich==14.0.0
@@ -28,5 +32,6 @@ six==1.17.0
 sqlparse==0.5.3
 termcolor==3.0.1
 tzdata==2025.2
+uritemplate==4.1.1
 vine==5.1.0
 wcwidth==0.2.13
