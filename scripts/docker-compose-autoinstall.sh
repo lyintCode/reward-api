@@ -70,9 +70,6 @@ sudo curl -L "https://github.com/docker/compose/releases/download/v2.32.4/docker
 sudo chmod +x /usr/local/bin/docker-compose
 docker-compose --version
 
-echo -e "\e[42m\e[97m Копирование .env файла \e[0m"
-cp .env.example .env
-
 echo -e "\n\e[42m\e[97m ===Установка завершена=== \e[0m"
 
 echo -e "\n\nДля запуска контейнеров текущим пользователем, пожалуйста, выполните 'newgrp docker' вручную или перезапустите терминал\n\n"

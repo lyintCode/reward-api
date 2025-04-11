@@ -21,6 +21,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # CORS
+    'corsheaders',
+
     # DRF
     'rest_framework',
     'rest_framework_simplejwt',
@@ -112,19 +115,19 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),  # Время жизни access-токена
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=14),   # Время жизни refresh-токена
-    'ROTATE_REFRESH_TOKENS': False,               # Ротация refresh-токенов
-    'BLACKLIST_AFTER_ROTATION': True,             # Черный список после ротации
-    'UPDATE_LAST_LOGIN': False,                   # Обновление времени последнего входа
-    'ALGORITHM': 'HS256',                         # Алгоритм шифрования
-    'SIGNING_KEY': os.getenv('JWT_SECRET_KEY'),                    # Ключ для подписи токенов
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=14),
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'UPDATE_LAST_LOGIN': False,
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': os.getenv('JWT_SECRET_KEY'),
     'VERIFYING_KEY': None,
     'AUDIENCE': None,
     'ISSUER': None,
-    'AUTH_HEADER_TYPES': ('Bearer',),            # Тип авторизации в заголовке
-    'USER_ID_FIELD': 'id',                       # Поле ID пользователя
-    'USER_ID_CLAIM': 'user_id',                  # Имя поля user_id в payload
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
 }
 
 # Celery
@@ -136,6 +139,6 @@ CELERY_TIMEZONE = 'Europe/Moscow'
 CELERY_BEAT_SCHEDULE = {
     'process-scheduled-rewards': {
         'task': 'rewards.tasks.process_scheduled_rewards',
-        'schedule': 10.0,  # каждые 60 секунд
+        'schedule': 10.0,  # каждые 10 секунд
     },
 }

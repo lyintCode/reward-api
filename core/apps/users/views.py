@@ -1,4 +1,5 @@
 from rest_framework.views import APIView
+from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework import status
@@ -9,8 +10,8 @@ from .serializers import UserProfileSerializer, UserRegistrationSerializer
 
 class UserProfileView(APIView):
     """
-    Эндпоинт GET /api/profile/.
-    Доступен только авторизованным пользователям.
+    Эндпоинт: GET /api/profile/
+    Доступен только авторизованным пользователям
     Возвращает данные: username, email, coins
     """
     permission_classes = [IsAuthenticated]
@@ -35,7 +36,7 @@ class UserProfileView(APIView):
         }
     )
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request: Request, *args, **kwargs) -> Response:
         user = request.user
 
         # Сериализуем данные пользователя
@@ -46,7 +47,7 @@ class UserProfileView(APIView):
     
 class UserRegistrationView(APIView):
     """
-    Эндпоинт POST /api/registration/
+    Эндпоинт: POST /api/registration/
     Регистрация нового пользователя
     """
     permission_classes = [AllowAny]
@@ -59,9 +60,15 @@ class UserRegistrationView(APIView):
             400: "Неверные данные."
         }
     )
-    def post(self, request, *args, **kwargs):
+
+    def post(self, request: Request, *args, **kwargs) -> Response:
         serializer = UserRegistrationSerializer(data=request.data)
+
         if serializer.is_valid():
             serializer.save()
-            return Response({"message": "Пользователь успешно зарегистрирован."}, status=status.HTTP_201_CREATED)
+            return Response(
+                {"message": "Пользователь успешно зарегистрирован."}, 
+                status=status.HTTP_201_CREATED
+            )
+        
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

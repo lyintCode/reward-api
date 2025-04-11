@@ -6,6 +6,10 @@ load_dotenv(os.path.join(BASE_DIR, '.env'))
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
+# В ТЗ не сказано про использование wsgi сервера
+# И прокси веб сервера
+# Поэтому оставляю True, что бы работала статика
+# в админке и в сваггере
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
@@ -23,4 +27,5 @@ DATABASES = {
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "http://127.0.0.1:3000"
 ]

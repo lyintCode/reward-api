@@ -3,6 +3,7 @@ from django.conf import settings
 
 class ScheduledReward(models.Model):
     """Модель запланированных заданий"""
+    
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -15,7 +16,8 @@ class ScheduledReward(models.Model):
         return f"{self.user.username} - {self.amount} монет в {self.execute_at}"
     
 class RewardLog(models.Model):
-    """Модель выполненных заданий"""
+    """Модель логирования выполненных заданий"""
+
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,

@@ -1,4 +1,5 @@
 from rest_framework.views import APIView
+from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
@@ -6,15 +7,14 @@ from django.utils import timezone
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 
-
 from .models import ScheduledReward, RewardLog
 from .serializers import RewardLogSerializer, RewardRequestSerializer
 
 class RewardLogListView(APIView):
     """
-    Эндпоинт GET /api/rewards/.
-    Доступен только авторизованным пользователям.
-    Возвращает список всех записей RewardLog для текущего пользователя.
+    Эндпоинт: GET /api/rewards/
+    Доступен только авторизованным пользователям
+    Возвращает список всех записей RewardLog для текущего пользователя
     """
     permission_classes = [IsAuthenticated]
 
@@ -35,7 +35,7 @@ class RewardLogListView(APIView):
         }
     )
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request: Request, *args, **kwargs) -> Response:
         # Получаем текущего пользователя
         user = request.user
 
@@ -50,9 +50,9 @@ class RewardLogListView(APIView):
     
 class RewardRequestView(APIView):
     """
-    Эндпоинт POST /api/rewards/request/.
-    Ппользователь может запросить награду только один раз в сутки.
-    Создает ScheduledReward с временем выполнения через 5 минут.
+    Эндпоинт: POST /api/rewards/request/
+    Ппользователь может запросить награду только один раз в сутки
+    Создает ScheduledReward с временем выполнения через 5 минут
     """
     permission_classes = [IsAuthenticated]
 
@@ -73,18 +73,17 @@ class RewardRequestView(APIView):
         }
     )
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request: Request, *args, **kwargs) -> Response:
         # Валидация данных
         serializer = RewardRequestSerializer(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
 
-        # Получаем текущего пользователя
         user = request.user
 
-        # Устанавливаем время выполнения награды через 5 минут
+        # Dыполнениt награды через 5 минут
         execute_at = timezone.now() + timezone.timedelta(minutes=5)
 
-        # Создаем объект ScheduledReward
+        # Создаем ScheduledReward
         ScheduledReward.objects.create(
             user=user,
             amount=100,
@@ -95,7 +94,6 @@ class RewardRequestView(APIView):
         user.last_reward_request = timezone.now()
         user.save()
 
-        # Возвращаем успешный ответ
         return Response(
             {"status": "Награда успешно запрошена. Она будет начислена через 5 минут."}, 
             status=status.HTTP_201_CREATED

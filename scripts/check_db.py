@@ -6,7 +6,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-def check_db():
+def check_db() -> bool:
+    """
+    Функция проверки состояния БД
+    Используется при разворачивании контейнера api
+    """
     try:
         db_name = os.getenv("DB_NAME")
         db_user = os.getenv("DB_USER")
