@@ -27,6 +27,7 @@ INSTALLED_APPS = [
 
     # Apps
     'authentication',
+    'users',
 
 ]
 
@@ -88,6 +89,9 @@ USE_TZ = True
 
 # Static
 STATIC_URL = 'static/'
+
+# Auth model
+AUTH_USER_MODEL = 'users.User'
 
 # Django REST
 REST_FRAMEWORK = {
