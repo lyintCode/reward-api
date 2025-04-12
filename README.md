@@ -136,6 +136,20 @@ chmod +x ./scripts/demo.sh
 === Демонстрация завершена ===
 ```
 
+Создание администратора и вход в админку
+```bash
+# Входим в контейнер
+docker-compose exec api bash
+
+# Создаем админа
+DJANGO_SETTINGS_MODULE="core.settings.prod" python manage.py createsuperuser
+
+# Выход из контейнера
+exit
+```
+
+Адрес админки `http://localhost:8000/admin/`
+
 ## **Применение миграций**
 Миграции применяются автоматически при запуске в контейнере внутри файла scripts/api_entrypoint.sh
 
@@ -155,6 +169,11 @@ pip install -r requirements.txt
 Запуск тестов
 ```bash
 # Так как настройки разделенные, то необходимо указать dev настройки
+
+# Запуск всех тестов разом
+DJANGO_SETTINGS_MODULE="core.settings.dev" python manage.py test
+
+# Запуск тестов отдельно каждого приложения
 DJANGO_SETTINGS_MODULE="core.settings.dev" python manage.py test authentication
 DJANGO_SETTINGS_MODULE="core.settings.dev" python manage.py test rewards
 DJANGO_SETTINGS_MODULE="core.settings.dev" python manage.py test users

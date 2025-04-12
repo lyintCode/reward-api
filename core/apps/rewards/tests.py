@@ -6,7 +6,7 @@ from rest_framework.test import APITestCase
 from rest_framework import status
 
 from users.models import User
-from .models import RewardLog, ScheduledReward
+from rewards.models import RewardLog, ScheduledReward
 
 class RewardsTests(APITestCase):
     def setUp(self):
