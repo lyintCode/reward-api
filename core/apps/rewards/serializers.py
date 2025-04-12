@@ -29,7 +29,7 @@ class RewardRequestSerializer(serializers.Serializer):
         if user.last_reward_request:
             now = timezone.now()
             last_request_time = now - user.last_reward_request
-            if last_request_time.total_seconds() > 86400:  # 1 день
+            if last_request_time.total_seconds() < 86400:  # 1 день
                 raise serializers.ValidationError(f"Вы уже запросили награду сегодня. Попробуйте завтра.")
 
         return data
